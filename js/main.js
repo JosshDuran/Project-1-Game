@@ -39,7 +39,7 @@ function component(width, height, color, x, y) {
     this.y += this.speedY;
   }
 }
-// Adding movement to my primary object
+// Adding movement to object, updating with frames
 function updateGameArea() {
 	gameArea.clear();
   obstacle.update();
