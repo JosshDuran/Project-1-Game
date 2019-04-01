@@ -1,12 +1,10 @@
-
-
 var myPrimary;
 
 function startGame() {
   gameArea.start();
   myPrimary = new component(30, 30, "red", 160, 0);
 }
-
+// Create canvas
 var gameArea = {
   canvas : document.createElement("canvas"),
   start : function() {
@@ -20,7 +18,7 @@ var gameArea = {
   		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   	}
 }
-
+// Starting Primary object speifications 
 function component(width, height, color, x, y) {
   this.width = width;
   this.height = height;
@@ -32,9 +30,11 @@ function component(width, height, color, x, y) {
   	ctx.fillRect(this.x, this.y, this.width, this.height);
 	}
 }
-
+// Adding movement to my primary object
 function updateGameArea() {
 	gameArea.clear();
 	myPrimary.y += 1;
 	myPrimary.update();
 }
+
+//Adding controls
