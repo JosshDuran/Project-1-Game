@@ -9,6 +9,11 @@
 </head>
 <body onload ="startGame()">
 	<p>Drop it</p>
+	<div>
+		<button onmousedown="stop()" onmouseup="clearmove()">BREAK</button>
+		<button onmousedown="moveleft()" onmouseup="clearmove()">LEFT</button>
+		<button onmousedown="moveright()" onmouseup="clearmove()">RIGHT</button>
+	</div>
 	<script src="js/main.js"></script>
 </body>
 </html>
