@@ -66,6 +66,7 @@ function updateGameArea() {
     gameArea.stop();
   } else {
 	gameArea.clear();
+  obstacle.x += -1;
   obstacle.update();
   myPrimary.newPos();
 	myPrimary.y += 1;
