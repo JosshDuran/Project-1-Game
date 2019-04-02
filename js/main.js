@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-document.addEventListener("keydown", movementHandler)
+  document.addEventListener("keydown", movementHandler)
 })
 
 var myPrimary;
@@ -9,7 +9,8 @@ var scoreBoard;
 function startGame() {
   scoreBoard = new component("20px", "Consolas", "black", 350, 20, "text");
   gameArea.start();
-  myPrimary = new component(30, 30, "red", 160, 0);
+  // myPrimary = new component(30, 30, "red", 160, 0);
+  myPrimary = new component(30, 30, "images/pop-1.png", 160, 0, "image");
   // obstacle = new component(10, 200, "purple", 300, 120);
 }
 // Create canvas
@@ -38,6 +39,10 @@ function everyinterval(n) {
 // Starting Primary object speifications 
 function component(width, height, color, x, y, type) {
   this.type = type
+  if (type == "image") {
+    this.image = new Image();
+    this.image.src = color;
+  }
   this.width = width;
   this.height = height;
   this.speedX = 0;
@@ -46,10 +51,16 @@ function component(width, height, color, x, y, type) {
   this.y = y;
   this.update = function() {    
   	ctx = gameArea.context;
-    if (this.type == "text") {
-      ctx.font = this.width + " " + this.height;
-      ctx.fillStyle = color;
-      ctx.fillText(this.text, this.x, this.y);
+    // if (this.type == "text") {
+    //   ctx.font = this.width + " " + this.height;
+    //   ctx.fillStyle = color;
+    //   ctx.fillText(this.text, this.x, this.y);
+    // } else {
+    if (type == "image") {
+      ctx.drawImage(this.image, 
+        this.x, 
+        this.y,
+        this.width, this.height);
     } else {
   	ctx.fillStyle = color;
   	ctx.fillRect(this.x, this.y, this.width, this.height);
