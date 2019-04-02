@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("keydown", movementHandler)
+})
+
 var myPrimary;
 var obstacles = [];
 
@@ -75,62 +79,44 @@ function updateGameArea() {
       return;
     } 
   }
-    gameArea.clear();
-  gameArea.frameNo += 6;
-  if (gameArea.frameNo == 1 || everyinterval(150)) {
-    y = gameArea.canvas.height;
-    minWidth = 20;
-    maxWidth = 200;
-    width = Math.floor(Math.random()*(maxWidth-minWidth+1)+minWidth);
-    minGap = 50;
-    maxGap = 200;
-    gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-    obstacles.push(new component(width, 10, "purple", 0, y));
-    obstacles.push(new component(y - width - gap, 10, "purple", width + gap,y));
-  }
-  for (i = 0; i < obstacles.length; i += 1) {
-    obstacles[i].y += -1;
-    obstacles[i].update();
-  }
+   gameArea.clear();
+   gameArea.frameNo += 6;
+    if (gameArea.frameNo == 1 || everyinterval(150)) {
+      y = gameArea.canvas.height;
+      minWidth = 20;
+      maxWidth = 200;
+      width = Math.floor(Math.random()*(maxWidth-minWidth+1)+minWidth);
+      minGap = 50;
+      maxGap = 200;
+      gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+      obstacles.push(new component(width, 10, "purple", 0, y));
+      obstacles.push(new component(y - width - gap, 10, "purple", width + gap,y));
+    }
+    for (i = 0; i < obstacles.length; i += 1) {
+      obstacles[i].y += -1;
+      obstacles[i].update();
+    }
   myPrimary.newPos();
   // myPrimary.y += 1;
   myPrimary.update();
 }
-//   gameArea.clear();
-//   gameArea.frameNo += 1;
-//   if (gameArea.frameNo == 1 || everyinterval(150)) {
-//     x = gameArea.canvas.width;
-//     minHeight = 20;
-//     maxHeight = 200;
-//     height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-//     minGap = 50;
-//     maxGap = 200;
-//     gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-//     obstacles.push(new component(10, height, "purple", x, 0));
-//     obstacles.push(new component(10, x - height - gap, "purple", x, height + gap));
-//   }
-//   for (i = 0; i < obstacles.length; i += 1) {
-//     obstacles[i].x += -1;
-//     obstacles[i].update();
-//   }
-//   myPrimary.newPos();
-// 	myPrimary.y += 1;
-// 	myPrimary.update();
-// }
 //Adding control functions
-function stop(){
-  myPrimary.speedY -= 1;
+function movementHandler(e) {
+// LEFT=>x-=1, UP=>y-=1, RIGHT=> x+=1, DOWN=>y+=1; 
+// LEFT=37, UP=38, RIGHT=39, DOWN=40, 
+  switch (e.keyCode) {
+    case (37):
+      myPrimary.x -= 10
+    break
+    case (38):
+      myPrimary.y -= 10
+    break
+    case (39):
+      myPrimary.x += 10
+    break
+    case (40):
+      myPrimary.y += 10
+    break
+  }
 }
 
-function moveleft(){
-  myPrimary.speedX -= 1;
-}
-
-function moveright(){
-  myPrimary.speedX += 1;
-}
-
-function clearmove(){
-  myPrimary.speedX = 0;
-  myPrimary.speedY = 0;
-}
