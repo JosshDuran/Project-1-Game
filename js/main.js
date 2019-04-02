@@ -18,7 +18,10 @@ var gameArea = {
   	},
   	clear : function () {
   		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  	}
+  	},
+    stop : function() {
+    clearInterval(this.interval);
+  }
 }
 // Starting Primary object speifications 
 function component(width, height, color, x, y) {
@@ -38,14 +41,36 @@ function component(width, height, color, x, y) {
     this.x += this.speedX;
     this.y += this.speedY;
   }
+  this.crashWith = function(otherobj) {
+    var myleft = this.x;
+    var myright = this.x + (this.width);
+    var mytop = this.y;
+    var mybottom = this.y + (this.height);
+    var otherleft = otherobj.x;
+    var otherright = otherobj.x + (otherobj.width);
+    var othertop = otherobj.y;
+    var otherbottom = otherobj.y + (otherobj.height);
+    var crash = true;
+    if ((mybottom < othertop) ||
+    (mytop > otherbottom) ||
+    (myright < otherleft) ||
+    (myleft > otherright)) {
+      crash = false;
+    }
+    return crash;
+  }
 }
 // Adding movement to object, updating with frames
 function updateGameArea() {
+  if (myPrimary.crashWith(obstacle)) {
+    gameArea.stop();
+  } else {
 	gameArea.clear();
   obstacle.update();
   myPrimary.newPos();
 	myPrimary.y += 1;
 	myPrimary.update();
+  }
 }
 
 //Adding control functions
